@@ -93,7 +93,7 @@ class Socket extends Component {
                         </tr>
                         <tr>
                             <td>pty-req</td>
-                            <td className="dark">xterm-256colorx;û%%ÿÿ !"#$'()2356789:;=>FHIJKZ[\]</td>
+                            <td className="dark">{`xterm-256colorx;û%%ÿÿ !"#$'()2356789:;=>FHIJKZ[\\]`}</td>
                         </tr>
                         <tr>
                             <td>shell</td>
