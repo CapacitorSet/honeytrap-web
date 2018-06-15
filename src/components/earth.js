@@ -73,8 +73,8 @@ class Earth extends Component {
                 this.updateCanvas();
             });
 
-        d3.select(this.refs.canvas).call(drag);
-        d3.select(this.refs.canvas).call(zoom);
+        d3.select(this.canvas).call(drag);
+        d3.select(this.canvas).call(zoom);
 
         window.addEventListener("resize", () => this.updateDimensions);
     }
@@ -151,7 +151,7 @@ class Earth extends Component {
 
     updateCanvas() {
         requestAnimationFrame(() => {
-            let canvas = this.refs.canvas;
+            let canvas = this.canvas;
             if (!canvas)
                 return;
 
@@ -234,7 +234,7 @@ class Earth extends Component {
 
         return (
             <div>
-                <canvas className={ classNames({ 'hidden': loading }) } style={{ 'cursor': 'move' }} ref="canvas" width={900} height={800}/>
+                <canvas className={ classNames({ 'hidden': loading }) } style={{ 'cursor': 'move' }} ref={(ref) => this.canvas = ref} width={900} height={800}/>
             </div>
         );
     }
