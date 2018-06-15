@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import Header from './header';
-import SessionList from './session-list';
-
-import View from './view';
 import moment from 'moment';
 
 import * as d3 from 'd3';
@@ -14,37 +10,9 @@ import * as topojson from 'topojson';
 import Color from 'color';
 import classNames from 'classnames';
 
-import { fetchCountries, clearHotCountries } from '../actions/index';
+import { fetchCountries } from '../actions/index';
 
-function darken(col, amt) {
-    var usePound = false;
-
-    if (col[0] == "#") {
-        col = col.slice(1);
-        usePound = true;
-    }
-
-    var num = parseInt(col,16);
-
-    var r = (num >> 16) + amt;
-
-    if (r > 255) r = 255;
-    else if  (r < 0) r = 0;
-
-    var b = ((num >> 8) & 0x00FF) + amt;
-
-    if (b > 255) b = 255;
-    else if  (b < 0) b = 0;
-
-    var g = (num & 0x0000FF) + amt;
-
-    if (g > 255) g = 255;
-    else if (g < 0) g = 0;
-
-    return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
-}
-
-class Earth extends React.Component {
+class Earth extends Component {
     constructor() {
         super();
 
@@ -63,9 +31,6 @@ class Earth extends React.Component {
         dispatch(fetchCountries()).then(() => {
             this.setState({loading: false});
         });
-
-        let canvas = this.refs.canvas;
-        const context = canvas.getContext('2d');
 
         const angle = 90;
         this.projection = d3.geoOrthographic()
@@ -97,8 +62,6 @@ class Earth extends React.Component {
 
                 this.updateCanvas();
             });
-
-        const { width, height } = canvas;
 
         var zoom = d3.zoom()
             .scaleExtent([200, 2000]);

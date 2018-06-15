@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { addSession, fetchSessions } from '../actions/index';
-import { Link } from 'react-router';
 
 import Header from './header';
 
 class View extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="col-sm-9 content">

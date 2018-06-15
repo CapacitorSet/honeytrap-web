@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { addSession, fetchSessions } from '../actions/index';
-import SessionListHeader from '../components/session-list-header';
 import { Link } from 'react-router';
 
 class SessionList extends Component {

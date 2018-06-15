@@ -1,22 +1,8 @@
-import React, { Component } from 'react';
-
-import { connect } from 'react-redux';
-
-import Header from './header';
-import SessionList from './session-list';
+import React, {PureComponent} from 'react';
 
 import View from './view';
-import Flag from "react-flags";
 
-class Agents extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentWillMount() {
-        const { dispatch } = this.props;
-    }
-
+export default class Agents extends PureComponent {
     render() {
         return (
             <View title="Overview" subtitle="Agents">
@@ -25,10 +11,3 @@ class Agents extends Component {
         );
     }
 }
-
-function mapStateToProps(state) {
-    return {
-    };
-}
-
-export default connect(mapStateToProps)(Agents);

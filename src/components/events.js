@@ -3,21 +3,11 @@ import moment from 'moment';
 
 import { connect } from 'react-redux';
 
-import Header from './header';
-import SessionList from './session-list';
 
 import View from './view';
 import Flag from "react-flags";
 
 class Events extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentWillMount() {
-        const { dispatch } = this.props;
-    }
-
     renderTable() {
         if(!this.props.events) {
             return (

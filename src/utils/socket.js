@@ -15,7 +15,8 @@ class Socket {
         };
 
         websocket.onclose = function(event) {
-            var reason = "";
+            /*
+            let reason = "";
 
             if (event.code == 1000)
                 reason = "Normal closure, meaning that the purpose for which the connection was established has been fulfilled.";
@@ -48,6 +49,7 @@ class Socket {
 
             // todo(nl5887): differentiate connection errors and query errors
             // storeDispatcher(authConnected({connected: false, errors: reason}));
+            */
             dispatch(connectionStatus(false));
         };
 

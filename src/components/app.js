@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Header from './header';
-
 import Dashboard from './dashboard';
-import Attacks from './attacks';
 import Events from './events';
 import Agents from './agents';
+/*
+import SessionShow from './components/session-show';
+import Socket from './components/socket';
+import Server from './components/server';
+import Random from './components/random';
+*/
 
 import Navigation from './navigation';
-import Search from './search';
 
-import SessionList from './session-list';
 import ConfigurationOverview from './configuration-overview';
 import NotFoundPage from './not-found';
 
-import { HashRouter, BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
+import { Redirect, Switch, Route } from 'react-router-dom';
 
 class App extends Component {
     render() {
@@ -65,6 +66,13 @@ class App extends Component {
                         <Route exact path="/events" component={Events} />
                         <Route exact path="/configuration" component={ConfigurationOverview} />
                         <Route path="/404" component={NotFoundPage} />
+                        {/*
+                        <Route path="/session/:id" component={SessionShow} />
+                        <Route path="/session/:id" component={SessionShow} />
+                        <Route path="/socket" component={Socket} />
+                        <Route path="/server" component={Server} />
+                        <Route path="/random" component={Random} />
+                        */}
                         <Redirect from='*' to='/404' />
                     </Switch>
                 </div>

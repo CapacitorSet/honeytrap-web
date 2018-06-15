@@ -2,20 +2,9 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import Header from './header';
-import SessionList from './session-list';
-
 import View from './view';
 
 class Attacks extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentWillMount() {
-        const { dispatch } = this.props;
-    }
-
     renderTable() {
         if(!this.props.events) {
             return (

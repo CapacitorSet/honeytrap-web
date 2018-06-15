@@ -2,19 +2,13 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import Header from './header';
-import SessionList from './session-list';
 import Earth from './earth';
 
 import View from './view';
 import moment from 'moment';
 import Flag from "react-flags";
 
-import * as d3 from 'd3';
-import * as topojson from 'topojson';
-
 import * as countries from 'i18n-iso-countries';
-import { clearHotCountries } from '../actions/index';
 
 import classNames from 'classnames';
 
