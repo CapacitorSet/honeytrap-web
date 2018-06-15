@@ -32,12 +32,14 @@ class App extends Component {
         }
 
         let versionAvailable = null;
-        if (false) {
+        /*
+        if (...) {
             versionAvailable =
                 <div className="alert alert-warning" role="alert">
                     New version available. <a>Upgrade</a>.
                 </div>;
         }
+        */
 
         return (
             <div className="container">
