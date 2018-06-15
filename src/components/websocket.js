@@ -6,7 +6,7 @@ import { default as Socket } from '../utils/socket';
 
 class Websocket extends Component {
     componentWillMount() {
-	      const { dispatch } = this.props;
+        const { dispatch } = this.props;
 
         let url;
 

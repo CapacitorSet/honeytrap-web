@@ -57,18 +57,18 @@ class App extends Component {
                             </div>
                         </nav>
                     </div>
-                        <Switch>
-                            <Route exact path="/" component={Dashboard} / >
-                                <Route exact path="/agents" component={Agents} />
-                                <Route exact path="/events" component={Events} />
-                                <Route exact path="/configuration" component={ConfigurationOverview} />
-                                <Route path="/404" component={NotFoundPage} />
-                                <Redirect from='*' to='/404' />
-                        </Switch>
+                    <Switch>
+                        <Route exact path="/" component={Dashboard} / >
+                        <Route exact path="/agents" component={Agents} />
+                        <Route exact path="/events" component={Events} />
+                        <Route exact path="/configuration" component={ConfigurationOverview} />
+                        <Route path="/404" component={NotFoundPage} />
+                        <Redirect from='*' to='/404' />
+                    </Switch>
                 </div>
             </div>
         );
-	  }
+    }
 }
 
 function mapStateToProps(state) {

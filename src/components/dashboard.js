@@ -41,7 +41,7 @@ class Dashboard extends Component {
         var uptime = now.diff(moment(start), 'minutes');
 
         let hotCountries = this.props.hotCountries.sort((left, right) => {
-          return right.count - left.count;
+            return right.count - left.count;
         }).slice(0, 10).map((country, i) => {
             const isocode = country['isocode'];
 
@@ -79,17 +79,17 @@ class Dashboard extends Component {
             return red;
         }, []).slice(0, 10).map((event, i) => {
             return <tr key={i} className={ classNames({'show': (20 > i) }) } style={{ fontFamily: 'courier', fontSize: '0.8em' }}>
-            <td style={{ border: 'none', padding: '2px' }}>
-            <Flag
-            name={event['source.country.isocode']}
-            format="png"
-            basePath="images/flags"
-            pngSize={16}
-            shiny={false}
-            />
-            </td>
-            <td style={{ border: 'none', padding: '2px' }}>
-            { `${event["source-ip"]}` }
+                <td style={{ border: 'none', padding: '2px' }}>
+                    <Flag
+                        name={event['source.country.isocode']}
+                        format="png"
+                        basePath="images/flags"
+                        pngSize={16}
+                        shiny={false}
+                    />
+                </td>
+                <td style={{ border: 'none', padding: '2px' }}>
+                    { `${event["source-ip"]}` }
                 </td>
                 <td style={{ border: 'none', padding: '2px' }}>
                     { `${event["category"]}` }
@@ -128,7 +128,7 @@ class Dashboard extends Component {
                             <h4 style={{ fontFamily: 'courier' }}>Last attacks</h4>
                             <table className="table table-condensed">
                                 <tbody>
-                                { events }
+                                    { events }
                                 </tbody>
                             </table>
                         </div>

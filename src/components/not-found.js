@@ -6,29 +6,29 @@ import { Link } from 'react-router';
 import View from './view';
 
 class NotFoundPage extends Component {
-	constructor(props) {
-		super(props);
-	}
+    constructor(props) {
+        super(props);
+    }
 
-	componentWillMount() {
-		const { dispatch } = this.props;
-	}
+    componentWillMount() {
+        const { dispatch } = this.props;
+    }
 
-	renderTable() {
-	}
+    renderTable() {
+    }
 
-	render() {
-		return (
-			<View title="Overview" subtitle="Not found">
+    render() {
+        return (
+            <View title="Overview" subtitle="Not found">
             Not found
-			</View>
-		);
-	}
+            </View>
+        );
+    }
 }
 
 function mapStateToProps(state) {
-	return {
-	};
+    return {
+    };
 }
 
 export default connect(mapStateToProps)(NotFoundPage);

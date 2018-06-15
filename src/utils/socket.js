@@ -50,12 +50,12 @@ class Socket {
             // storeDispatcher(authConnected({connected: false, errors: reason}));
             dispatch(connectionStatus(false));
         };
-        
+
         websocket.onerror = function(event) {
             dispatch(connectionStatus(false));
         };
         //websocket.onmessage = this.onmessage.bind(this);
-        
+
 
         websocket.onmessage = function(message) {
             let msg = JSON.parse(message.data);
@@ -81,6 +81,6 @@ class Socket {
     close() {
         this.websocket.close();
     }
-};
+}
 
 export default Socket;

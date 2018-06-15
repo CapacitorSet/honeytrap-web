@@ -42,7 +42,7 @@ function configureStore() {
 
 const store = configureStore({
     sessions: { all: [], events: [], session: null, content: [], metadata: null, hotCountries: [], connected: false, topology: {} },
-}); 
+});
 
 ReactDOM.render(
     <div>

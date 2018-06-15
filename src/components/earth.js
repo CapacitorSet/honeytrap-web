@@ -41,7 +41,7 @@ function darken(col, amt) {
     if (g > 255) g = 255;
     else if (g < 0) g = 0;
 
-    return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
+    return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
 }
 
 class Earth extends React.Component {
@@ -72,36 +72,36 @@ class Earth extends React.Component {
             .clipAngle(angle);
 
         var drag = d3.drag()
-                     .on('drag', () => {
-                         var dx = d3.event.dx;
-                         var dy = d3.event.dy;
+            .on('drag', () => {
+                var dx = d3.event.dx;
+                var dy = d3.event.dy;
 
-                         var rotation = this.projection.rotate();
-                         var radius = this.projection.scale();
+                var rotation = this.projection.rotate();
+                var radius = this.projection.scale();
 
-                         var scale = d3.scaleLinear()
-                                       .domain([-1 * radius, radius])
-                                       .range([-90, 90]);
+                var scale = d3.scaleLinear()
+                    .domain([-1 * radius, radius])
+                    .range([-90, 90]);
 
-                         var degX = scale(dx);
-                         var degY = scale(dy);
+                var degX = scale(dx);
+                var degY = scale(dy);
 
-                         rotation[0] += degX;
-                         rotation[1] -= degY;
+                rotation[0] += degX;
+                rotation[1] -= degY;
 
-                         if (rotation[1] > 90)   rotation[1] = 90;
-                         if (rotation[1] < -90)  rotation[1] = -90;
-                         if (rotation[0] >= 180) rotation[0] -= 360;
+                if (rotation[1] > 90)   rotation[1] = 90;
+                if (rotation[1] < -90)  rotation[1] = -90;
+                if (rotation[0] >= 180) rotation[0] -= 360;
 
-                         this.projection.rotate(rotation);
+                this.projection.rotate(rotation);
 
-                         this.updateCanvas();
-                     });
+                this.updateCanvas();
+            });
 
         const { width, height } = canvas;
 
         var zoom = d3.zoom()
-                .scaleExtent([200, 2000]);
+            .scaleExtent([200, 2000]);
 
         zoom
             .on('zoom', (event) => {
@@ -119,7 +119,7 @@ class Earth extends React.Component {
     componentWillUnmount() {
         window.removeEventListener("resize", () => this.updateDimensions);
     }
- 
+
     componentWillReceiveProps(nextProps, nextState) {
         if (!nextProps.countries.length)
             return;
@@ -162,15 +162,15 @@ class Earth extends React.Component {
         let projection = this.projection;
 
         d3.transition()
-          .duration(2500)
-          .tween("rotate", () => {
-              var r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
-              return (t) => {
-                  projection.rotate(r(t));
+            .duration(2500)
+            .tween("rotate", () => {
+                var r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
+                return (t) => {
+                    projection.rotate(r(t));
 
-                  this.updateCanvas();
-              };
-          });
+                    this.updateCanvas();
+                };
+            });
 
         return
     }
@@ -181,7 +181,7 @@ class Earth extends React.Component {
             documentElement = d.documentElement,
             body = d.getElementsByTagName('body')[0],
             width = w.innerWidth || documentElement.clientWidth || body.clientWidth,
-            height = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
+            height = w.innerHeight || documentElement.clientHeight || body.clientHeight;
 
         this.setState({width: width, height: height});
     }
@@ -198,7 +198,7 @@ class Earth extends React.Component {
                 context(context).
                 projection(
                     this.projection
-                        .translate([canvas.width/2, (canvas.height * (5/12))])
+                        .translate([canvas.width / 2, (canvas.height * (5 / 12))])
                 );
 
             context.clearRect(0, 0, canvas.width, canvas.height);

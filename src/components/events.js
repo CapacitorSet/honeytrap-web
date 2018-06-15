@@ -31,11 +31,11 @@ class Events extends Component {
         return events.sort(function (left, right) {
             return moment(right.date).utc().diff(moment(left.date).utc());
         }).slice(0, 10).map((event, i) => {
-            let message = (event.message || event.payload );
+            let message = (event.message || event.payload);
 
             if (event.category == 'ssh') {
                 message = event['ssh.request-type'];
-            };
+            }
 
             return (
                 <tr key={i}>
@@ -43,13 +43,13 @@ class Events extends Component {
                     <td>{event.sensor}</td>
                     <td>{event.category}</td>
                     <td><Flag
-                            name={event['source.country.isocode']}
-                            basePath="images/flags"
-                            format="png"
-                            pngSize={16}
-                            shiny={false}
-                        />
-                        {event["source-ip"] } ({event["source-port"] })</td>
+                        name={event['source.country.isocode']}
+                        basePath="images/flags"
+                        format="png"
+                        pngSize={16}
+                        shiny={false}
+                    />
+                    {event["source-ip"] } ({event["source-port"] })</td>
                     <td>{event["destination-ip"] } ({event["destination-port"] })</td>
                     <td>{message}</td>
                 </tr>

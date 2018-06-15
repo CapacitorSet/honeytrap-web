@@ -27,18 +27,18 @@ class Attacks extends Component {
 
 
         return events.map((event, i) => {
-            const message = (event.message || event.payload );
-            
-            return (				
-                    <tr key={i}>
-                        <td>{event.date.format('lll')}</td>
-                        <td>{event.sensor}</td>
-                        <td>{event.category}</td>
-                        <td>{event["source-ip"] } ({event["source-port"] })</td>
-                        <td>{event["destination-ip"] } ({event["destination-port"] })</td>
-                        <td>{message}</td>
-                    </tr>
-                
+            const message = (event.message || event.payload);
+
+            return (
+                <tr key={i}>
+                    <td>{event.date.format('lll')}</td>
+                    <td>{event.sensor}</td>
+                    <td>{event.category}</td>
+                    <td>{event["source-ip"] } ({event["source-port"] })</td>
+                    <td>{event["destination-ip"] } ({event["destination-port"] })</td>
+                    <td>{message}</td>
+                </tr>
+
             );
         });
     }
