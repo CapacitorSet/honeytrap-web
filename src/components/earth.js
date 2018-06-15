@@ -83,7 +83,7 @@ class Earth extends Component {
         window.removeEventListener("resize", () => this.updateDimensions);
     }
 
-    componentWillReceiveProps(nextProps, nextState) {
+    componentDidUpdate(nextProps, nextState) {
         if (!nextProps.countries.length)
             return;
 
