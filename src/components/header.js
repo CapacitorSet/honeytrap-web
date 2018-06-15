@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Link } from 'react-router';
 
-class Header extends Component {
+class Header extends PureComponent {
     render() {
         return (
             <div className="dashhead-titles">
