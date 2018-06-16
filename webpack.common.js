@@ -8,7 +8,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const extractCSS = new ExtractTextPlugin('[name].fonts.css');
-const extractSCSS = new ExtractTextPlugin('[name].styles.css');
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
 const SRC_DIR = path.resolve(__dirname, 'src');
@@ -54,24 +53,6 @@ module.exports = {
           loader: 'html-loader'
         },
         {
-          test: /\.(scss)$/,
-          use: ['css-hot-loader'].concat(extractSCSS.extract({
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                  options: {alias: {
-                    '../images': '../public/images',
-                    '../fonts': '../public/fonts'
-                  }}
-              },
-              {
-                loader: 'sass-loader'
-              }
-            ]
-          }))
-        },
-        {
           test: /\.css$/,
           use: extractCSS.extract({
             fallback: 'style-loader',
@@ -100,7 +81,10 @@ module.exports = {
     plugins: [
       new webpack.NamedModulesPlugin(),
       extractCSS,
-      extractSCSS,
+      // Prevents Webpack from bundling non-English locales (saves several hundred KB)
+      // Can be adapted to support i18n, see article.
+      // https://medium.com/@michalozogan/how-to-split-moment-js-locales-to-chunks-with-webpack-de9e25caccea
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       new HtmlWebpackPlugin(
         {
           inject: true,
