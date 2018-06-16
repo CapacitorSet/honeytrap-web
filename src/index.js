@@ -10,8 +10,7 @@ import createHistory from 'history/createBrowserHistory'
 // import { i18n } from './config';
 
 import promise from 'redux-promise';
-// import css from './style.css';
-import './toolkit-inverse.css';
+import './toolkit-inverse.min.css';
 import './application.css';
 
 import { Websocket } from './components/index';
