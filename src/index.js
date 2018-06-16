@@ -13,7 +13,7 @@ import promise from 'redux-promise';
 import './toolkit-inverse.min.css';
 import './application.css';
 
-import { Websocket } from './components/index';
+import Websocket from './components/websocket';
 
 import App from './components/app';
 
