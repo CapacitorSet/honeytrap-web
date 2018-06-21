@@ -80,10 +80,12 @@ class Yara extends Component {
             <View title="Overview" subtitle="Events">
                 <Table headers={[{
                     name: "Rule",
-                    key: "yara-rule"
+                    key: "yara-rule",
+                    isSearchable: true,
                 }, {
                     name: "Tags",
                     key: "yara-tags",
+                    isSearchable: true,
                     renderer: tags => tags.split(",").map(tag => <span className="badge badge-secondary">{tag}</span>)
                 }, {
                     name: "Date",
@@ -91,27 +93,34 @@ class Yara extends Component {
                     renderer: date => date.fromNow()
                 }, {
                     name: "Sensor",
-                    key: "sensor"
+                    key: "sensor",
+                    isSearchable: true,
                 }, {
                     name: "Category",
-                    key: "category"
+                    key: "category",
+                    isSearchable: true,
                 }, {
                     name: "Source",
                     key: "source",
+                    isSearchable: true,
                     renderer: ({isocode, ip, port}) => <span><Flag
                         name={isocode}
                         basePath="images/flags"
                         format="png"
                         pngSize={16}
                         shiny={false}
-                    /> {ip} ({port})</span>
+                    /> {ip} ({port})</span>,
+                    stringify: ({ip, port}) => ip + ":" + port,
                 }, {
                     name: "Destination",
                     key: "destination",
-                    renderer: ({ip, port}) => `${ip} (${port})`
+                    isSearchable: true,
+                    renderer: ({ip, port}) => ip + ":" + port,
+                    stringify: ({ip, port}) => ip + ":" + port,
                 }, {
                     name: "Message",
-                    key: "message"
+                    key: "message",
+                    isSearchable: true,
                 }]}
                 data={data} />
                 {/*
