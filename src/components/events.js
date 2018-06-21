@@ -18,33 +18,39 @@ class Events extends Component {
         const { events } = this.props;
 
         // sort on time
-        return events.sort(function (left, right) {
-            return moment(right.date).utc().diff(moment(left.date).utc());
-        }).slice(0, 10).map((event, i) => {
-            let message = (event.message || event.payload);
+        return events
+            .filter(e => !("yara.rule" in e))
+            .map(event => {
+                event.date = moment(event.date).utc();
+                return event;
+            })
+            .sort((left, right) => right.date.diff(left.date))
+            .slice(0, 10)
+            .map((event, i) => {
+                let message = (event.message || event.payload);
 
-            if (event.category == 'ssh') {
-                message = event['ssh.request-type'];
-            }
+                if (event.category == 'ssh') {
+                    message = event['ssh.request-type'];
+                }
 
-            return (
-                <tr key={i}>
-                    <td>{event.date.fromNow() }</td>
-                    <td>{event.sensor}</td>
-                    <td>{event.category}</td>
-                    <td><Flag
-                        name={event['source.country.isocode']}
-                        basePath="images/flags"
-                        format="png"
-                        pngSize={16}
-                        shiny={false}
-                    />
-                    {event["source-ip"] } ({event["source-port"] })</td>
-                    <td>{event["destination-ip"] } ({event["destination-port"] })</td>
-                    <td>{message}</td>
-                </tr>
-            );
-        });
+                return (
+                    <tr key={i}>
+                        <td>{event.date.fromNow()}</td>
+                        <td>{event.sensor}</td>
+                        <td>{event.category}</td>
+                        <td><Flag
+                            name={event['source.country.isocode']}
+                            basePath="images/flags"
+                            format="png"
+                            pngSize={16}
+                            shiny={false}
+                        />
+                        {event["source-ip"] } ({event["source-port"] })</td>
+                        <td>{event["destination-ip"] } ({event["destination-port"] })</td>
+                        <td>{message}</td>
+                    </tr>
+                );
+            });
     }
 
     render() {

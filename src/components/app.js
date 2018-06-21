@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Dashboard from './dashboard';
 import Events from './events';
 import Agents from './agents';
+import Yara from './yara';
 /*
 import SessionShow from './components/session-show';
 import Socket from './components/socket';
@@ -64,6 +65,7 @@ class App extends Component {
                         <Route exact path="/" component={Dashboard} / >
                         <Route exact path="/agents" component={Agents} />
                         <Route exact path="/events" component={Events} />
+                        <Route exact path="/yara" component={Yara} />
                         <Route exact path="/configuration" component={ConfigurationOverview} />
                         <Route path="/404" component={NotFoundPage} />
                         {/*

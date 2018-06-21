@@ -13,6 +13,9 @@ class Navigation extends Component {
                 <li>
                     <NavLink activeClassName="active" to="/events">Overview</NavLink>
                 </li>
+                <li>
+                    <NavLink activeClassName="active" to="/yara">Yara</NavLink>
+                </li>
                 <li className="nav-header">Agents</li>
                 <li>
                     <NavLink activeClassName="active" to="/agents">Overview</NavLink>
