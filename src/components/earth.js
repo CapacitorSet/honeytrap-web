@@ -25,7 +25,7 @@ class Earth extends Component {
     }
 
     componentDidMount() {
-        let { dispatch } = this.props;
+        const { dispatch } = this.props;
 
         dispatch(fetchCountries()).then(() => {
             this.setState({loading: false});
@@ -35,20 +35,19 @@ class Earth extends Component {
         this.projection = d3.geoOrthographic()
             .clipAngle(angle);
 
-        var drag = d3.drag()
+        const drag = d3.drag()
             .on('drag', () => {
-                var dx = d3.event.dx;
-                var dy = d3.event.dy;
+                const {dx, dy} = d3.event;
 
-                var rotation = this.projection.rotate();
-                var radius = this.projection.scale();
+                const rotation = this.projection.rotate();
+                const radius = this.projection.scale();
 
-                var scale = d3.scaleLinear()
+                const scale = d3.scaleLinear()
                     .domain([-1 * radius, radius])
                     .range([-90, 90]);
 
-                var degX = scale(dx);
-                var degY = scale(dy);
+                const degX = scale(dx);
+                const degY = scale(dy);
 
                 rotation[0] += degX;
                 rotation[1] -= degY;
@@ -62,7 +61,7 @@ class Earth extends Component {
                 this.updateCanvas();
             });
 
-        var zoom = d3.zoom()
+        const zoom = d3.zoom()
             .scaleExtent([200, 2000]);
 
         zoom
@@ -74,11 +73,11 @@ class Earth extends Component {
         d3.select(this.canvas).call(drag);
         d3.select(this.canvas).call(zoom);
 
-        window.addEventListener("resize", () => this.updateDimensions);
+        window.addEventListener("resize", () => this.updateDimensions());
     }
 
     componentWillUnmount() {
-        window.removeEventListener("resize", () => this.updateDimensions);
+        window.removeEventListener("resize", () => this.updateDimensions());
     }
 
     componentDidUpdate(nextProps, nextState) {
@@ -92,19 +91,15 @@ class Earth extends Component {
         this.updateCanvas();
 
         this.hotCountries = nextProps.countries.reduce((red, value) => {
-            let country = countries.find((v) => {
-                return v.iso_a2 == value.isocode;
-            });
+            const country = countries.find(v => v.iso_a2 == value.isocode);
 
             if (!country)
                 return red;
 
-            red.push({
+            return red.concat({
                 ...value,
                 ...country,
             });
-
-            return red;
         }, []);
 
         if (this.hotCountries.length == 0)
@@ -116,16 +111,16 @@ class Earth extends Component {
         });
 
 
-        let last = this.hotCountries[this.hotCountries.length - 1]
+        const last = this.hotCountries[this.hotCountries.length - 1]
 
         const p = d3.geoCentroid(last);
 
-        let projection = this.projection;
+        const projection = this.projection;
 
         d3.transition()
             .duration(2500)
             .tween("rotate", () => {
-                var r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
+                const r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
                 return (t) => {
                     projection.rotate(r(t));
 
@@ -137,25 +132,23 @@ class Earth extends Component {
     }
 
     updateDimensions() {
-        var w = window,
+        let w = window,
             d = document,
-            documentElement = d.documentElement,
-            body = d.getElementsByTagName('body')[0],
-            width = w.innerWidth || documentElement.clientWidth || body.clientWidth,
-            height = w.innerHeight || documentElement.clientHeight || body.clientHeight;
+            width = w.innerWidth || d.documentElement.clientWidth || d.body.clientWidth,
+            height = w.innerHeight || d.documentElement.clientHeight || d.body.clientHeight;
 
-        this.setState({width: width, height: height});
+        this.setState({width, height});
     }
 
     updateCanvas() {
         requestAnimationFrame(() => {
-            let canvas = this.canvas;
+            const canvas = this.canvas;
             if (!canvas)
                 return;
 
             const context = canvas.getContext('2d');
 
-            let path = d3.geoPath().
+            const path = d3.geoPath().
                 context(context).
                 projection(
                     this.projection
@@ -173,7 +166,7 @@ class Earth extends Component {
             if (!world)
                 return;
 
-            var land = topojson.feature(world, world.objects.land);
+            const land = topojson.feature(world, world.objects.land);
             context.beginPath();
             path(land);
             context.fillStyle = 'white';
@@ -182,16 +175,12 @@ class Earth extends Component {
             context.strokeStyle = 'gray';
             context.stroke();
 
-            const total = this.hotCountries.reduce((total, country) => {
-                total += country.count;
-                return (total);
-            }, 0);
+            const total = this.hotCountries.reduce((total, country) => total + country.count, 0);
 
             this.hotCountries.forEach((country) => {
                 const min = 1 + moment().diff(country.last, 'minutes');
-                let color = Color('#440000');
                 context.beginPath();
-                color = color.lighten((Math.log(min) * 50) * (country.count / total));
+                const color = color.lighten((Math.log(min) * 50) * (country.count / total));
                 context.fillStyle = color.hexString();
                 path(country);
                 context.fill();
