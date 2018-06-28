@@ -6,11 +6,10 @@ import { connect } from 'react-redux';
 import View from './view';
 import Flag from "react-flags";
 
-import Table from './table';
+import Table, {Tag} from './table';
 
 class Yara extends Component {
     render() {
-        console.log("Yara render");
         if(!this.props.events) {
             return (
                 <div>Loading...</div>
@@ -52,29 +51,6 @@ class Yara extends Component {
                     message: message || "",
                 };
             });
-        /*
-            .map((event, i) => {
-                return (
-                    <tr key={i}>
-                        <td>{event["yara.rule"]}</td>
-                        <td>{tags}</td>
-                        <td>{event.date.fromNow()}</td>
-                        <td>{event.sensor}</td>
-                        <td>{event.category}</td>
-                        <td><Flag
-                            name={event['source.country.isocode']}
-                            basePath="images/flags"
-                            format="png"
-                            pngSize={16}
-                            shiny={false}
-                        />
-                        {event["source-ip"] } ({event["source-port"] })</td>
-                        <td>{event["destination-ip"] } ({event["destination-port"] })</td>
-                        <td>{message}</td>
-                    </tr>
-                );
-            });
-            */
 
         return (
             <View title="Overview" subtitle="Events">
@@ -86,7 +62,7 @@ class Yara extends Component {
                     name: "Tags",
                     key: "yara-tags",
                     isSearchable: true,
-                    renderer: tags => tags.split(",").map(tag => <span className="badge badge-secondary">{tag}</span>)
+                    renderer: (tags, {tagHandler}) => tags.split(",").map(tag => <Tag text={tag} handler={tagHandler} />)
                 }, {
                     name: "Date",
                     key: "date",
