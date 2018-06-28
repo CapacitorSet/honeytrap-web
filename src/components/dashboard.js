@@ -10,8 +10,6 @@ import Flag from "react-flags";
 
 import * as countries from 'i18n-iso-countries';
 
-import classNames from 'classnames';
-
 class Dashboard extends Component {
     constructor(props) {
         super(props);
@@ -45,7 +43,7 @@ class Dashboard extends Component {
                 </td>
                 <td style={{ border: 'none', padding: '2px' }}>
                     <Flag
-                        name={isocode}
+                        name={isocode || "_unknown"}
                         format="png"
                         basePath="images/flags"
                         pngSize={16}
@@ -72,10 +70,10 @@ class Dashboard extends Component {
             red.push({ 'source-ip': val['source-ip'], 'destination-port': val['destination-port'], 'category': [ val['category'] ], 'source.country.isocode': val['source.country.isocode'] });
             return red;
         }, []).slice(0, 10).map((event, i) => {
-            return <tr key={i} className={ classNames({'show': (20 > i) }) } style={{ fontFamily: 'courier', fontSize: '0.8em' }}>
+            return <tr key={i} className={ (i < 20) ? "show" : ""} style={{ fontFamily: 'courier', fontSize: '0.8em' }}>
                 <td style={{ border: 'none', padding: '2px' }}>
                     <Flag
-                        name={event['source.country.isocode']}
+                        name={event['source.country.isocode'] || "_unknown"}
                         format="png"
                         basePath="images/flags"
                         pngSize={16}

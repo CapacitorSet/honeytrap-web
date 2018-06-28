@@ -61,7 +61,7 @@ class Events extends Component {
                     key: "source",
                     isSearchable: true,
                     renderer: ({isocode, ip, port}) => <span><Flag
-                        name={isocode}
+                        name={isocode || "_unknown"}
                         basePath="images/flags"
                         format="png"
                         pngSize={16}

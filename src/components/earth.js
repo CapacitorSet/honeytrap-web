@@ -8,7 +8,6 @@ import * as d3 from 'd3';
 import * as topojson from 'topojson';
 
 import Color from 'color';
-import classNames from 'classnames';
 
 import { fetchCountries } from '../actions/index';
 
@@ -68,7 +67,6 @@ class Earth extends Component {
 
         zoom
             .on('zoom', (event) => {
-                console.log(d3.event.transform);
                 this.projection.scale(d3.event.transform.k, d3.event.transform.k);
                 this.updateCanvas();
             });
@@ -234,7 +232,7 @@ class Earth extends Component {
 
         return (
             <div>
-                <canvas className={ classNames({ 'hidden': loading }) } style={{ 'cursor': 'move' }} ref={(ref) => this.canvas = ref} width={900} height={800}/>
+                <canvas className={ loading ? "hidden" : ""} style={{ 'cursor': 'move' }} ref={(ref) => this.canvas = ref} width={900} height={800}/>
             </div>
         );
     }
