@@ -39,7 +39,7 @@ class Dashboard extends Component {
 
             return <tr key={i} style={{ fontFamily: 'courier', fontSize: '0.8em' }}>
                 <td style={{ border: 'none', padding: '2px' }}>
-                    {`${country["count"]}`  }
+                    { country["count"]  }
                 </td>
                 <td style={{ border: 'none', padding: '2px' }}>
                     <Flag
@@ -51,7 +51,7 @@ class Dashboard extends Component {
                     />
                 </td>
                 <td style={{ border: 'none', padding: '2px' }}>
-                    {`${ countries.getName(isocode.toUpperCase(), 'en') }`}
+                    { countries.getName(isocode.toUpperCase(), 'en') }`}
                 </td>
             </tr>;
         });
@@ -61,14 +61,12 @@ class Dashboard extends Component {
 
         // sort on time
         let events = this.props.events.reduce((red, val) => {
-            if (prev['source-ip'] == val["source-ip"]
-            )
+            if (prev['source-ip'] == val["source-ip"])
                 return red;
 
             prev = val;
 
-            red.push({ 'source-ip': val['source-ip'], 'destination-port': val['destination-port'], 'category': [ val['category'] ], 'source.country.isocode': val['source.country.isocode'] });
-            return red;
+            return red.concat({ 'source-ip': val['source-ip'], 'destination-port': val['destination-port'], 'category': [ val['category'] ], 'source.country.isocode': val['source.country.isocode'] });
         }, []).slice(0, 10).map((event, i) => {
             return <tr key={i} className={ (i < 20) ? "show" : ""} style={{ fontFamily: 'courier', fontSize: '0.8em' }}>
                 <td style={{ border: 'none', padding: '2px' }}>
@@ -81,13 +79,13 @@ class Dashboard extends Component {
                     />
                 </td>
                 <td style={{ border: 'none', padding: '2px' }}>
-                    { `${event["source-ip"]}` }
+                    { event["source-ip"] }
                 </td>
                 <td style={{ border: 'none', padding: '2px' }}>
-                    { `${event["category"]}` }
+                    { event["category"] }
                 </td>
                 <td style={{ border: 'none', padding: '2px' }}>
-                    { `${event["destination-port"]}` }
+                    { event["destination-port"] }
                 </td>
             </tr>
         });
@@ -105,62 +103,50 @@ class Dashboard extends Component {
 
             prev = val;
 
-            red.push(val);
-            return red;
+            return red.concat(val);
         }, []).slice(0, 10).map((val, i) => {
             return <li key={i} style={{ fontFamily: 'courier', fontSize: '0.8em' }}>{ val }</li>;
         });
 
         return (
             <View title="Overview" subtitle="Dashboard">
-                <div className="row" style={{ marginTop: '0px', position: 'relative' }}>
+                <div className="row" style={{ marginTop: '0px', position: 'relative', marginBottom: "1em" }}>
                     <div style={{ 'position': 'absolute', 'bottom': '0px', 'left': '0px', 'right': '0px' }}>
                         <div style={{ display: 'block', width: '100%', background: 'black', height: '100%', position: 'absolute', opacity: '0.3' }}></div>
-                        <div className='pull-left col-md-4'>
-                            <h4 style={{ fontFamily: 'courier' }}>Last attacks</h4>
+                        <div className='pull-left col-md-6'>
+                            <h4 style={{ fontFamily: 'monospace' }}>Last attacks</h4>
                             <table className="table table-condensed">
                                 <tbody>
                                     { events }
                                 </tbody>
                             </table>
                         </div>
-                        <div className='pull-left col-md-4'>
-                            <h4 style={{ fontFamily: 'courier' }}>Origin</h4>
+                        <div className='pull-left col-md-6'>
+                            <h4 style={{ fontFamily: 'monospace' }}>Origin</h4>
                             <table className="table table-condensed">
                                 <tbody>
                                     { hotCountries }
                                 </tbody>
                             </table>
                         </div>
-                        <div className='pull-left col-md-4'>
-                            <h4 style={{ fontFamily: 'courier' }}>Status</h4>
-                            <ul className="list-unstyled" >
-                                <li style={{ fontFamily: 'courier', fontSize: '0.8em' }}>
-                                    uptime:&nbsp;
-                                    <span>
-                                        { Math.floor(uptime / (60 * 24)) }d &nbsp;
-                                        { Math.floor(uptime / 60) }h &nbsp;
-                                        { Math.floor(uptime % 60) }m
-                                    </span>
-                                </li>
-                                <li style={{ fontFamily: 'courier', fontSize: '0.8em' }}>
-                                    version:&nbsp;
-                                    <span>
-                                        { this.props.metadata.version }
-                                    </span>
-                                </li>
-                                <li style={{ fontFamily: 'courier', fontSize: '0.8em' }}>
-                                    commitid:&nbsp;
-                                    <span>
-                                        { this.props.metadata.shortcommitid }
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                     <Earth countries={this.props.hotCountries}></Earth>
                     <ul className="list-unstyled hidden" style={{ position: 'absolute', bottom: '0px' }}>
                         { exec }
+                    </ul>
+                </div>
+                <div>
+                    <h4>Status</h4>
+                    <ul className="list-unstyled" >
+                        <li>
+                            Uptime: { Math.floor(uptime / (60 * 24)) }d { Math.floor(uptime / 60) }h { Math.floor(uptime % 60) }m
+                        </li>
+                        <li>
+                            Version: { this.props.metadata.version }
+                        </li>
+                        <li>
+                            Commit ID: { this.props.metadata.shortcommitid }
+                        </li>
                     </ul>
                 </div>
             </View>
