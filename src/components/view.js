@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { PureComponent } from 'react';
 
 import Header from './header';
 
-class View extends Component {
+export default class View extends PureComponent {
     render() {
         return (
             <div className="col-sm-9 content">
@@ -22,12 +21,3 @@ class View extends Component {
         );
     }
 }
-
-function mapStateToProps(state) {
-    return {
-        connected: state.sessions.connected,
-        metadata: state.sessions.metadata
-    };
-}
-
-export default connect(mapStateToProps)(View);
