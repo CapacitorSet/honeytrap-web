@@ -75,7 +75,7 @@ export default class Table extends Component {
                 </thead>
                 <tbody>
                     {
-                        data.map(datum =>
+                        data.length === 0 ? (<tr><td colSpan={100}>No items available.</td></tr>) : data.map(datum =>
                             <tr key={datum.index}>
                                 {
                                     this.props.headers.map((h, i) => {
