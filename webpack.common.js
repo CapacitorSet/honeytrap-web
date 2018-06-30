@@ -3,11 +3,11 @@ dotenv.config();
 
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const extractCSS = new ExtractTextPlugin('[name].fonts.css');
+// const extractCSS = new ExtractTextPlugin('[name].fonts.css');
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
 const SRC_DIR = path.resolve(__dirname, 'src');
@@ -54,10 +54,11 @@ module.exports = {
         },
         {
           test: /\.css$/,
-          use: extractCSS.extract({
-            fallback: 'style-loader',
-            use: 'css-loader'
-          })
+          use: [{
+              loader: MiniCssExtractPlugin.loader
+            },
+            "css-loader"
+          ]
         },
         {
           test: /\.(png|jpg|jpeg|gif|ico)$/,
@@ -80,7 +81,9 @@ module.exports = {
     },
     plugins: [
       new webpack.NamedModulesPlugin(),
-      extractCSS,
+      new MiniCssExtractPlugin({
+        filename: "[name].fonts.css",
+      }),
       // Prevents Webpack from bundling non-English locales (saves several hundred KB)
       // Can be adapted to support i18n, see article.
       // https://medium.com/@michalozogan/how-to-split-moment-js-locales-to-chunks-with-webpack-de9e25caccea

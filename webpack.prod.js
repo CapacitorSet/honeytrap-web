@@ -9,11 +9,11 @@ const merge = require('webpack-merge');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = merge(common, {
+    mode: "production",
     devtool: 'cheap-module-source-map',
     plugins: [
         new webpack.DefinePlugin({
             "process.env": {
-                NODE_ENV: JSON.stringify("production"),
                 WEBSOCKET_URI: null,
                 CLIENT_VERSION: JSON.stringify(gitInfo.raw)
             }
