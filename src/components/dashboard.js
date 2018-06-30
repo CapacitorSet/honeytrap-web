@@ -30,9 +30,9 @@ class Dashboard extends Component {
 
         const { now } = this.state;
 
-        var uptime = now.diff(moment(start), 'minutes');
+        const uptime = now.diff(moment(start), 'minutes');
 
-        let hotCountries = this.props.hotCountries.sort((left, right) => {
+        const hotCountries = this.props.hotCountries.sort((left, right) => {
             return right.count - left.count;
         }).slice(0, 10).map((country, i) => {
             const isocode = country['isocode'];
@@ -60,7 +60,7 @@ class Dashboard extends Component {
         let prev = {};
 
         // sort on time
-        let events = this.props.events.reduce((red, val) => {
+        const events = this.props.events.reduce((red, val) => {
             if (prev['source-ip'] == val["source-ip"])
                 return red;
 
@@ -92,7 +92,7 @@ class Dashboard extends Component {
 
         prev = null;
 
-        let exec = this.props.events.reduce((red, event) => {
+        const exec = this.props.events.reduce((red, event) => {
             if (!event['ssh.exec'])
                 return red;
 

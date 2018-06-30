@@ -220,9 +220,7 @@ class Earth extends Component {
         const { loading } = this.state;
 
         return (
-            <div>
-                <canvas className={ loading ? "hidden" : ""} style={{ 'cursor': 'move' }} ref={(ref) => this.canvas = ref} width={900} height={800}/>
-            </div>
+            <canvas className={ loading ? "hidden" : ""} style={{ 'cursor': 'move' }} ref={(ref) => this.canvas = ref} width={900} height={800}/>
         );
     }
 }

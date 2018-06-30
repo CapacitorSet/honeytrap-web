@@ -33,7 +33,7 @@ class App extends Component {
             );
         }
 
-        let versionAvailable = null;
+        const versionAvailable = null;
         /*
         if (...) {
             versionAvailable =

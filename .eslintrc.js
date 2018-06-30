@@ -16,8 +16,10 @@ module.exports = {
         "indent": ["error", 4, {
             "SwitchCase": 0
         }],
+        "no-var": "error",
         "no-trailing-spaces": "error",
         "no-unused-vars": ["warn", {"args": "none"}],
+        "prefer-const": "warn",
         "space-infix-ops": "error",
         "space-in-parens": ["error", "never"],
         "react/prop-types": "warn"

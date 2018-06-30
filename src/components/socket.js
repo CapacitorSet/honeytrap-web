@@ -21,7 +21,7 @@ class Socket extends Component {
         this.setState ({socket: this.connection})
 
         this.connection.onmessage = (message) => {
-            let test = JSON.parse(message.data);
+            const test = JSON.parse(message.data);
             if(test.type === 'message') {
                 this.setState({
                     messages : this.state.messages.concat([ test.data ])

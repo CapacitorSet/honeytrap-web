@@ -12,39 +12,39 @@ export default function(state = INITIAL_STATE, action) {
     case CONNECTION_STATUS:
         return { ...state, connected: action.payload.connected };
     case RECEIVED_METADATA: {
-        let metadata = action.payload;
+        const metadata = action.payload;
         metadata.start = moment(metadata.start);
         return { ...state, metadata };
     }
     case FETCH_COUNTRIES: {
-        let payload = action.payload;
+        const payload = action.payload;
 
         const world = payload[0].data;
 
         let names = payload[1].data;
         names = d3.tsvParse(names);
 
-        let countries = topojson.feature(world, world.objects.countries).features.filter(d =>
+        const countries = topojson.feature(world, world.objects.countries).features.filter(d =>
             names.some(n => (d.id == n.iso_n3) && d.iso_a2 == n.iso_a2)
         ).sort((a, b) => a.iso_a2.localeCompare(b.iso_a2));
 
         return { ...state, topology: { countries, world, names } };
     }
     case RECEIVED_HOT_COUNTRIES: {
-        let payload = action.payload;
+        const payload = action.payload;
         return { ...state, hotCountries: payload };
     }
     case RECEIVED_EVENTS: {
-        let payload = action.payload;
+        const payload = action.payload;
 
-        let events = payload.reduce((red, event) =>
+        const events = payload.reduce((red, event) =>
             red.concat(Object.assign(event, {date: moment(event.date)}))
-        , []);
+            , []);
 
         return { ...state, events};
     }
     case RECEIVED_EVENT: {
-        let payload = action.payload;
+        const payload = action.payload;
         payload.date = moment(payload.date);
         return { ...state, ...payload, events: [payload, ...state.events]};
     }

@@ -17,7 +17,7 @@ class Websocket extends Component {
             url = ((location.protocol === "https:") ? "wss://" : "ws://") + location.host + "/ws";
         }
 
-        let socket = new Socket(url);
+        const socket = new Socket(url);
         socket.startWS(dispatch);
     }
 

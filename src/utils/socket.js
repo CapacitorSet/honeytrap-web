@@ -60,7 +60,7 @@ class Socket {
 
 
         websocket.onmessage = function(message) {
-            let msg = JSON.parse(message.data);
+            const msg = JSON.parse(message.data);
             switch (msg.type){
             case 'metadata':
                 dispatch(receivedMetadata(msg.data));
