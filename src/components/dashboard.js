@@ -51,7 +51,7 @@ class Dashboard extends Component {
                     />
                 </td>
                 <td style={{ border: 'none', padding: '2px' }}>
-                    { countries.getName(isocode.toUpperCase(), 'en') }`}
+                    { countries.getName(isocode.toUpperCase(), 'en') }
                 </td>
             </tr>;
         });
@@ -108,12 +108,13 @@ class Dashboard extends Component {
             return <li key={i} style={{ fontFamily: 'courier', fontSize: '0.8em' }}>{ val }</li>;
         });
 
+        const canvasWidth = "900px";
+
         return (
             <View title="Overview" subtitle="Dashboard">
-                <div className="row" style={{ marginTop: '0px', position: 'relative', marginBottom: "1em" }}>
-                    <div style={{ 'position': 'absolute', 'bottom': '0px', 'left': '0px', 'right': '0px' }}>
-                        <div style={{ display: 'block', width: '100%', background: 'black', height: '100%', position: 'absolute', opacity: '0.3' }}></div>
-                        <div className='pull-left col-md-6'>
+                <div className="row" style={{ marginTop: '0px', marginBottom: "1em", width: canvasWidth, position: "relative" }}>
+                    <div style={{ width: canvasWidth, background: 'black', opacity: 0.7, position: "absolute", bottom: 0 }}>
+                        <div className='pull-left col-md-6' style={{paddingTop: "15px"}}>
                             <h4 style={{ fontFamily: 'monospace' }}>Last attacks</h4>
                             <table className="table table-condensed">
                                 <tbody>
@@ -121,7 +122,7 @@ class Dashboard extends Component {
                                 </tbody>
                             </table>
                         </div>
-                        <div className='pull-left col-md-6'>
+                        <div className='pull-left col-md-6' style={{paddingTop: "15px"}}>
                             <h4 style={{ fontFamily: 'monospace' }}>Origin</h4>
                             <table className="table table-condensed">
                                 <tbody>
