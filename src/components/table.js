@@ -129,7 +129,7 @@ export class Row extends PureComponent {
                     })
                 }
             </tr>
-            { this.state.more && <tr><td colSpan={100}>{
+            { this.state.more && <tr><td colSpan={100} style={{paddingLeft: "16px", borderLeftWidth: "2px", borderLeftStyle: "solid", borderLeftColor: "#cfd2da"}}>{
                 Object.keys(this.props.datum).filter(key => key !== "index").map(key => {
                     const value = this.props.datum[key];
                     return <p key={key}><b>{key}</b>: {
