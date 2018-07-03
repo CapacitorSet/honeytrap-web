@@ -33,12 +33,9 @@ class Yara extends Component {
                     message = e['ssh.request-type'];
                 }
 
-                return {
+                return Object.assign(e, {
                     "yara-rule": e["yara.rule"],
                     "yara-tags": e["yara.tags"],
-                    date: e.date,
-                    sensor: e.sensor,
-                    category: e.category,
                     source: {
                         isocode: e['source.country.isocode'],
                         ip: e["source-ip"],
@@ -49,7 +46,7 @@ class Yara extends Component {
                         port: e["destination-port"]
                     },
                     message: message || "",
-                };
+                });
             });
 
         return (

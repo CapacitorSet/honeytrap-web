@@ -25,10 +25,7 @@ class Events extends Component {
                     message = e['ssh.request-type'];
                 }
 
-                return {
-                    date: e.date,
-                    sensor: e.sensor,
-                    category: e.category,
+                return Object.assign(e, {
                     source: {
                         isocode: e['source.country.isocode'],
                         ip: e["source-ip"],
@@ -39,7 +36,7 @@ class Events extends Component {
                         port: e["destination-port"]
                     },
                     message: message || "",
-                };
+                });
             });
 
         return (

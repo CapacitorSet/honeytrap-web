@@ -75,17 +75,9 @@ export default class Table extends Component {
                 </thead>
                 <tbody>
                     {
-                        data.length === 0 ? (<tr><td colSpan={100}>No items available.</td></tr>) : data.map(datum =>
-                            <tr key={datum.index}>
-                                {
-                                    this.props.headers.map((h, i) => {
-                                        const value = datum[h.key];
-                                        const renderer = h.renderer || String;
-                                        return <td key={i}>{renderer(value, {tagHandler})}</td>
-                                    })
-                                }
-                            </tr>
-                        )
+                        data.length === 0 ?
+                            (<tr><td colSpan={100}>No items available.</td></tr>) :
+                            data.map(datum => <Row key={datum.index} datum={datum} tagHandler={tagHandler} headers={this.props.headers} />)
                     }
                 </tbody>
             </table></div>);
@@ -121,6 +113,41 @@ export default class Table extends Component {
             this.state,
             {searchTags: this.state.searchTags.filter(tag => tag !== text)}
         ));
+    }
+}
+
+export class Row extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {more: false}
+    }
+
+    render() {
+        return <React.Fragment>
+            <tr onClick={this.toggleMore.bind(this)}>
+                {
+                    this.props.headers.map((h, i) => {
+                        const value = this.props.datum[h.key];
+                        const renderer = h.renderer || String;
+                        return <td key={i}>{renderer(value, {tagHandler: this.props.tagHandler})}</td>
+                    })
+                }
+            </tr>
+            { this.state.more && <tr><td colSpan={100}>{
+                Object.keys(this.props.datum).filter(key => key !== "index").map(key => {
+                    const value = this.props.datum[key];
+                    return <p key={key}><b>{key}</b>: {
+                        typeof value === "string" ?
+                        value :
+                        JSON.stringify(value)
+                    }</p>
+                })
+            }</td></tr> }
+            </React.Fragment>
+    }
+
+    toggleMore() {
+        this.setState({more: !this.state.more});
     }
 }
 
