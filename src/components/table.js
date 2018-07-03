@@ -8,13 +8,9 @@ export default class Table extends Component {
 
     static buildState(props) {
         const randomPrefix = Math.random().toString();
-        const data = props.data.map((datum, index) => {
-            datum.index = randomPrefix + index;
-            datum.display = true;
-            return datum;
-        });
+        const data = props.data.map((datum, index) => Object.assign(datum, {index: randomPrefix + index}));
         return {
-            headers: props.headers.map(h => Object.assign({sortDirection: 0}, h)),
+            headers: props.headers.map(h => Object.assign(h, {sortDirection: 0})),
             randomPrefix,
             data,
             searchText: "",
